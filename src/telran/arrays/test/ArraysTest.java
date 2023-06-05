@@ -1,6 +1,8 @@
 package telran.arrays.test;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Timeout;
+import java.util.*;
 
 import telran.arrays.ArraysInt;
 
@@ -9,6 +11,8 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.util.Arrays;
 
 public class ArraysTest {
+	private static final int N_ELEMENTS = 1000000;
+	private static final int N_RUNS = 999999;
 	@Test
 	void initialTest() {
 		int [] ar1= {1,2,3};
@@ -124,13 +128,85 @@ public class ArraysTest {
 		assertArrayEquals(expected4,ArraysInt.insertNumberSorted(src, 50));
 
 
-
+	}
+	@Test
+	void maxLongTest() {
+		assertEquals(Long.MAX_VALUE,getLongMax());
+		
+	}
+	private long getLongMax() {
+		long res = 1;
+		while(res>0) {
+			res*=2;
+		}
+		return res-1;
+	}
+	@Timeout(3)
+	void maxIntTest() {
+		assertEquals(Integer.MAX_VALUE,getLongMax());
+		
+	}
+	private int getIntMax() {
+		int res = 1;
+		while(res>0) {
+			res++;
+		}
+		return res-1;
+	}
+	@Test
+	void binarySearchNumberTest() {
+		int array []= {10,20,30,40};
+		int number=15;
+		int expectation1=-2;
+		assertEquals(expectation1,ArraysInt.binarySearchNumber(array, number));
+		number=0;
+		int expectation2=-1;
+		assertEquals(expectation2,ArraysInt.binarySearchNumber(array, number));
+		number=25;
+		int expectation3=-3;
+		assertEquals(expectation3,ArraysInt.binarySearchNumber(array, number));
+		
+	}
+	@Test
+	void muchRepeatedTest() {
+		
+		int array [] = new int [N_ELEMENTS];
+		for(int i=0;i<N_RUNS;i++) {
+			assertEquals(0,ArraysInt.binarySearchNumber(array, 0));
+		}
+	}
+	@Test
+	void sortingTest() {
+		int array[]=new int [1000];
+		for(int i=0;i<array.length;i++) {
+			array[i]=new Random().nextInt();
+		}
+		int quickSortSortedArray[]=Arrays.copyOf(array, array.length);
+		ArraysInt.quickSort(quickSortSortedArray);
+		int bubbleSortedArray[]=Arrays.copyOf(array, array.length);
+		ArraysInt.bubbleSort(bubbleSortedArray);
+		assertTrue(isSorted(bubbleSortedArray));
+		assertTrue(isSorted(quickSortSortedArray));
 
 		
-
-
-
+		
+		
 	}
+	public boolean isSorted(int []array) {
+		boolean sorted=true;
+		for(int i=0;i<array.length-1;i++) {
+			if(array[i]>array[i+1]) {
+				sorted=false;
+				
+			}
+			
+		}
+		return sorted;
+		
+	}
+	
+	
+	
 
 
 }
