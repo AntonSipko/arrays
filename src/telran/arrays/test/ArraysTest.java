@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Timeout;
 import java.util.*;
 
 import telran.arrays.ArraysInt;
+import telran.arrays.InterviewTasks;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -203,6 +204,17 @@ public class ArraysTest {
 		}
 		return sorted;
 		
+	}
+	@Test
+	void getMaxValueTest() {
+		short[]array={1,-1,2,-2,5,-5};
+		int expected=5;
+		short[]array1={1,2,3,4,5};
+		int expected1=-1;
+		
+		assertEquals(expected,InterviewTasks.getMaxWithNegativePresentation(array));
+		assertEquals(expected1,InterviewTasks.getMaxWithNegativePresentation(array1));
+
 	}
 	
 	
